@@ -4,10 +4,10 @@ jobs:
     build:
         runs-on: ubuntu-18.04
         name: Build and test
+        env:
+            RUNNER_CONTEXT: ${{ runner.workspace }}
         steps:
-            - name: Dump runner context
-              env:
-                RUNNER_CONTEXT: ${{ runner.workspace }}
+            - name: Dump runner context              
               run: echo "$RUNNER_CONTEXT"
             - name: Checkout code
               uses: actions/checkout@master
