@@ -1,0 +1,23 @@
+name: Main CI
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-18.04
+        name: Build and test
+        steps:
+            - uses: actions/checkout@master
+            - name: Setup go
+              uses: actions/setup-go@v1
+              with:
+                  go-version: '1.13.x'
+            - name: Build server solution
+              run: go build ./server/...
+            - name: Run server unit tests
+              run: go test ./server/timetracking/usecases
+            - name: Setup node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '10.x'
+            - name: Build client app
+              run: cd client/&&yarn install&&cd ..

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+    api:
+        image: techchallengetimeapi
+        build:
+            context: ./server
+            dockerfile: ./Dockerfile
+        ports:
+            - '8080:8080'
+        networks:
+            - techchallengetime-network
+    frontend:
+        image: techchallengetimefrontend
+        build:
+            context: ./client
+            dockerfile: ./Dockerfile
+        ports:
+            - '3000:80'
+        depends_on:
+            - 'api'
+        networks:
+            - techchallengetime-network
+networks:
+    techchallengetime-network:
+        driver: bridge
