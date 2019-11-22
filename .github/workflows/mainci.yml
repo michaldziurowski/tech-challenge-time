@@ -18,6 +18,8 @@ jobs:
                 GOPATH: ${{ runner.workspace }}
               run: cd server/&&go build ./server/...&&cd ..
             - name: Run server unit tests
+              env:
+                GOPATH: ${{ runner.workspace }}
               run: go test ./server/timetracking/usecases
             - name: Setup node
               uses: actions/setup-node@v1
