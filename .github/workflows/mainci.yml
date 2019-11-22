@@ -4,11 +4,7 @@ jobs:
     build:
         runs-on: ubuntu-18.04
         name: Build and test
-        env:
-            RUNNER_CONTEXT: ${{ runner.workspace }}
         steps:
-            - name: Dump runner context              
-              run: echo "$RUNNER_CONTEXT"
             - name: Checkout code
               uses: actions/checkout@master
               with:
@@ -18,6 +14,8 @@ jobs:
               with:
                   go-version: '1.13.x'
             - name: Build server solution
+              env:
+                GOPATH: ${{ runner.workspace }}
               run: go build ./server/...
             - name: Run server unit tests
               run: go test ./server/timetracking/usecases
