@@ -7,7 +7,7 @@ jobs:
         steps:
             - name: Dump runner context
               env:
-                RUNNER_CONTEXT: ${{ toJson(runner) }}
+                RUNNER_CONTEXT: ${{ runner.workspace }}
               run: echo "$RUNNER_CONTEXT"
             - name: Checkout code
               uses: actions/checkout@master
